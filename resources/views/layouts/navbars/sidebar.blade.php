@@ -1,4 +1,4 @@
-<div class="sidebar" data-color="orange" data-background-color="white" data-image="{{ asset('material') }}/img/sidebar-1.jpg">
+<div class="sidebar" data-color="purple" data-background-color="white" data-image="{{ asset('material') }}/img/sidebar-1.jpg">
   <!--
       Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
 
@@ -18,16 +18,16 @@
         </a>
       </li>
 
-      <li class="nav-item{{ $activePage == 'icons' ? ' active' : '' }}">
-        <a class="nav-link" href="{{ route('user.dashboard') }}">
+      <li class="nav-item{{ $activePage == 'instituitions' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('instituition.index') }}">
           <i class="material-icons">bubble_chart</i>
           <p>{{ __('Instituições') }}</p>
         </a>
       </li>
-      <li class="nav-item{{ $activePage == 'icons' ? ' active' : '' }}">
-        <a class="nav-link" href="{{ route('icons') }}">
+      <li class="nav-item{{ $activePage == 'courses' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('course.index') }}">
           <i class="material-icons">bubble_chart</i>
-          <p>{{ __('Grupos') }}</p>
+          <p>{{ __('Cursos') }}</p>
         </a>
       </li>
 
@@ -42,14 +42,14 @@
           <ul class="nav">
             <li class="nav-item{{ $activePage == 'profile' ? ' active' : '' }}">
               <a class="nav-link" href="{{ route('profile.edit') }}">
-                <span class="sidebar-mini"> UP </span>
-                <span class="sidebar-normal">{{ __('User profile') }} </span>
+                <span class="sidebar-mini"> PU </span>
+                <span class="sidebar-normal">{{ __('Perfil do usuário') }} </span>
               </a>
             </li>
             <li class="nav-item{{ $activePage == 'user-management' ? ' active' : '' }}">
               <a class="nav-link" href="{{ route('user.index') }}">
-                <span class="sidebar-mini"> UM </span>
-                <span class="sidebar-normal"> {{ __('User Management') }} </span>
+                <span class="sidebar-mini"> GU </span>
+                <span class="sidebar-normal"> {{ __('Gerenciar usuários') }} </span>
               </a>
             </li>
           </ul>

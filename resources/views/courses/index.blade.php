@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'user-management', 'titlePage' => __('Users')])
+@extends('layouts.app', ['activePage' => 'courses', 'titlePage' => __('Cursos')])
 
 @section('content')
     <div class="content">
@@ -7,17 +7,16 @@
       <div class="col-md-12">
           <div class="card">
             <div class="card-header card-header-primary">
-              <h4 class="card-title ">Usuários</h4>
-              <p class="card-category"> Lista de usuários</p>
+              <h4 class="card-title ">Cursos</h4>
+              <p class="card-category"> Lista de cursos</p>
             </div>
             <div class="card-body">
                               <div class="row">
                 <div class="col-12 text-right">
-                  <a href="#" class="btn btn-sm btn-primary">Adicionar usuário</a>
+                  <a href="#" class="btn btn-sm btn-primary">Adicionar Curso</a>
                 </div>
               </div>
-
-              @include('user.list', ['user_list' => $users])
+              @include('courses.list', ['course_list' => $courses])
             </div>
           </div>
 
@@ -30,7 +29,7 @@
 
               <div class="card ">
                 <div class="card-header card-header-primary">
-                  <h4 class="card-title">{{ __('Cadastrar usuário') }}</h4>
+                  <h4 class="card-title">{{ __('Cadastrar curso') }}</h4>
                   <p class="card-category">{{ __('Formulário de cadastro') }}</p>
                 </div>
                 <div class="card-body ">
@@ -54,47 +53,51 @@
                   <div class="row">
 
                     <div class="col-sm-7">
-                        {{-- @if(session('success'))
+                        @if(session('success'))
                             <h3>{{ session('success') ['messages'] }} </h3>
                         @else
-                        <h3>sEM RETORNO</h3>
+                        <h3>Sem retorno</h3>
 
 
-                        @endif --}}
+                        @endif
 
-                        {!! Form::open(['route' => 'user.store', 'method' => 'post', 'class' => 'form-horizontal']) !!}
-                        <div class="row">
-                            <label class="col-sm-2 col-form-label">{{ __('CPF') }}</label>
-                            <div class="col-sm-7">
-                        @include('templates.formulario.input', ['label' => 'CPF', 'input'=> 'cpf', 'attributes' => ['placeholder' => 'Cpf']])
-                    </div></div>
+                        {!! Form::open(['route' => 'course.store', 'method' => 'post', 'class' => 'form-horizontal']) !!}
 
                     <div class="row">
-                        <label class="col-sm-2 col-form-label">{{ __('Nome') }}</label>
+                        <label class="col-sm-2 col-form-label">{{ __('Nome do Curso') }}</label>
                         <div class="col-sm-7">
-                        @include('templates.formulario.input', ['input' => 'name', 'input'=> 'name', 'attributes' => ['placeholder' => 'Nome']])
-                    </div></div>
+                    @include('templates.formulario.input', ['label' => 'Curso', 'input'=> 'name', 'attributes' => ['placeholder' => 'Nome']])
+                </div></div>
 
-                    <div class="row">
-                    <label class="col-sm-2 col-form-label">{{ __('Email') }}</label>
+
+                <div class="row">
+                    <label class="col-sm-2 col-form-label">{{ __('Nome do usuário') }}</label>
                     <div class="col-sm-7">
-                        @include('templates.formulario.input', ['input' => 'email', 'input'=> 'email', 'attributes' => ['placeholder' => 'E-mail']])
-                    </div></div>
+                @include('templates.formulario.select', ['label' => 'Usuário', 'select'=> 'user_id', 'data' => $user_list, 'attributes' => ['placeholder' => 'Exemplo: Henrique']])
+            </div></div>
 
-                    <div class="row">
-                        <label class="col-sm-2 col-form-label">{{ __('Telefone') }}</label>
-                        <div class="col-sm-7">
-                            @include('templates.formulario.input', ['input' => 'phone', 'input'=> 'phone', 'attributes' => ['placeholder' => 'Telefone']])
-                        </div></div>
+                <div class="row">
+                    <label class="col-sm-2 col-form-label">{{ __('Nome da Instituição') }}</label>
+                    <div class="col-sm-7">
+                @include('templates.formulario.select', ['label' => 'Instituição', 'select'=> 'instituition_id', 'data' => $instituition_list, 'attributes' => ['placeholder' => 'Exemplo: UEPG'], ['class' => 'form-control']])
+            </div></div>
 
-                    <div class="row">
-                        <label class="col-sm-2 col-form-label">{{ __('Senha') }}</label>
-                        @include('templates.formulario.password', ['input' => 'password', 'input'=> 'password', 'attributes' => ['placeholder' => 'Senha']])
-                    </div></div>
+            {{-- <div class="row">
+                <label class="col-sm-2 col-form-label">{{ __('Nome da Instituição') }}</label>
+                <div class="col-sm-7">
+            <select name="" class="form-control" id=""></select>
+        </div></div> --}}
+
+
+
+
+
 
                         @include('templates.formulario.submit', ['input' => 'Cadastrar'])
 
                         {!! Form::close() !!}
+
+
 
                       {{-- <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                         <input class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" id="input-name" type="text" placeholder="{{ __('Name') }}" value="{{ old('name', auth()->user()->name) }}" required="true" aria-required="true"/>

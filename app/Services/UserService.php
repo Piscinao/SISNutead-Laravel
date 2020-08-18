@@ -35,6 +35,7 @@ class UserService
             $usuario = $this->repository->create($data);
 
 
+
             return
             [
                 'success' => true,
@@ -60,9 +61,81 @@ class UserService
         }
     }
 
-    public function update(){}
+    public function update($data, $id)
+    {
 
-    public function delete(){}
+        try
+        {
+            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
+            $usuario = $this->repository->update($data, $id);
+
+
+
+            return
+            [
+                'success' => true,
+                'messages' => 'Usuário atualizado',
+                'data' => $usuario,
+            ];
+
+
+
+        }
+
+        catch(Exception $e)
+        {
+            switch(get_class ($e))
+            {
+                case QueryException::class : return ['success' => false, 'messages' => $e->getMessage()];
+                case ValidatorException::class : return ['success' => false, 'messages' => $e->getMessageBag()];
+                case Exception::class :  return ['success' => false, 'messages' => $e->getMessage()];
+                default :  return $e->getMessage();
+            }
+
+
+        }
+
+
+
+
+    }
+
+    public function destroy($user_id)
+    {
+        try
+        {
+            $this->repository->delete($user_id);
+
+
+            return
+            [
+                'success' => true,
+                'messages' => 'Usuário deletado',
+                'data' => null,
+            ];
+
+
+
+        }
+
+        catch(Exception $e)
+        {
+            switch(get_class ($e))
+            {
+                case QueryException::class : return ['success' => false, 'messages' => $e->getMessage()];
+                case ValidatorException::class : return ['success' => false, 'messages' => $e->getMessageBag()];
+                case Exception::class :  return ['success' => false, 'messages' => $e->getMessage()];
+                default :  return $e->getMessage();
+            }
+
+
+        }
+
+
+
+
+
+    }
 
 }
 

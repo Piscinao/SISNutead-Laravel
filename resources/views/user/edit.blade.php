@@ -5,21 +5,6 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-12">
-          <div class="card">
-            <div class="card-header card-header-primary">
-              <h4 class="card-title ">Usuários</h4>
-              <p class="card-category"> Lista de usuários</p>
-            </div>
-            <div class="card-body">
-                              <div class="row">
-                <div class="col-12 text-right">
-                  <a href="#" class="btn btn-sm btn-primary">Adicionar usuário</a>
-                </div>
-              </div>
-
-              @include('user.list', ['user_list' => $users])
-            </div>
-          </div>
 
 
 
@@ -30,13 +15,10 @@
 
               <div class="card ">
                 <div class="card-header card-header-primary">
-                  <h4 class="card-title">{{ __('Cadastrar usuário') }}</h4>
-                  <p class="card-category">{{ __('Formulário de cadastro') }}</p>
+                  <h4 class="card-title">{{ __('Editar usuário') }}</h4>
+                  <p class="card-category">{{ __('Formulário de edição') }}</p>
                 </div>
                 <div class="card-body ">
-
-
-
 
 
                   @if (session('status'))
@@ -62,7 +44,7 @@
 
                         @endif --}}
 
-                        {!! Form::open(['route' => 'user.store', 'method' => 'post', 'class' => 'form-horizontal']) !!}
+                        {!! Form::model($user, ['route' => ['user.update', $user->id], 'method' => 'put', 'class' => 'form-horizontal']) !!}
                         <div class="row">
                             <label class="col-sm-2 col-form-label">{{ __('CPF') }}</label>
                             <div class="col-sm-7">
@@ -92,7 +74,7 @@
                         @include('templates.formulario.password', ['input' => 'password', 'input'=> 'password', 'attributes' => ['placeholder' => 'Senha']])
                     </div></div>
 
-                        @include('templates.formulario.submit', ['input' => 'Cadastrar'])
+                        @include('templates.formulario.submit', ['input' => 'Atualizar'])
 
                         {!! Form::close() !!}
 

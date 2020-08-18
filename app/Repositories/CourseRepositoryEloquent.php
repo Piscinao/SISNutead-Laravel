@@ -4,21 +4,25 @@ namespace App\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use App\Repositories\UserRepository;
-use App\Entities\User;
-use App\Validators\UserValidator;
+use App\Repositories\CourseRepository;
+use App\Entities\Course;
+use App\Validators\CourseValidator;
 
-class UserRepositoryEloquent extends BaseRepository implements UserRepository
+/**
+ * Class CourseRepositoryEloquent.
+ *
+ * @package namespace App\Repositories;
+ */
+class CourseRepositoryEloquent extends BaseRepository implements CourseRepository
 {
-
-    public function selectBoxList(string $descricao = 'name', string $chave = 'id')
-    {
-        return $this->model->pluck($descricao, $chave)->all();
-    }
-
+    /**
+     * Specify Model class name
+     *
+     * @return string
+     */
     public function model()
     {
-        return User::class;
+        return Course::class;
     }
 
     /**
@@ -29,7 +33,7 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
     public function validator()
     {
 
-        return UserValidator::class;
+        return CourseValidator::class;
     }
 
 
@@ -40,5 +44,5 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
-
+    
 }

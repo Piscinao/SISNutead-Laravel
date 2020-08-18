@@ -56,9 +56,7 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('pages.icons');
     })->name('icons');
 
-    // Route::get('users', function () {
-	// 	return view('users.index');
-	// })->name('users.index');
+
 
 
 	Route::get('map', function () {
@@ -80,13 +78,17 @@ Route::group(['middleware' => 'auth'], function () {
 
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('user', 'UserController', ['except' => ['show']]);
-    Route::get('user', ['as' => 'user.index', 'uses' => 'UsersController@index']);
+
     Route::post('user', ['as' => 'user.store', 'uses' => 'UsersController@store']);
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
 	Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
 });
 
- Route::resource('users', 'UsersController');
+ Route::resource('user', 'UsersController');
+ Route::resource('instituition', 'InstituitionsController');
+ Route::resource('course', 'CoursesController');
+
+ Route::post('course/{course_id}/user', ['as' => 'course.user.store', 'uses' => 'CoursesController@userStore']);
 
 
